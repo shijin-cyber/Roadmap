@@ -15,6 +15,6 @@
     <div class="container">
         @yield('content')
     </div>
-    @yield('scripts') <!-- Add additional scripts if needed -->
+    @yield('scripts') 
 </body>
 </html>

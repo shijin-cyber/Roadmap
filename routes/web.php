@@ -21,4 +21,4 @@ Route::get('/', function () {
 Route::post('/products', [ProductController::class, 'store']);
 Route::get('get-products', [ProductController::class, 'getProducts']);
 
-// Route::post('/products','ProductController@store');
+

@@ -33,7 +33,6 @@
             </div>
         </div>
     </div>
-
     <table id="products-table" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -42,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Existing table rows will be dynamically updated -->
+          <!-- table body -->
         </tbody>
     </table>
 @endsection
@@ -55,7 +54,7 @@ $(document).ready(function() {
       
         $.ajax({
             
-            url: '{{ url('get-products') }}', // Route to fetch products
+            url: '{{ url('get-products') }}',
             method: 'GET',
             success: function(response) {
                 // Initialize DataTable with fetched data
@@ -67,11 +66,11 @@ $(document).ready(function() {
                             "data": null,
                             "render": function(data, type, row) {
                                 return `
-                                    <a href="#" class="btn btn-warning">Edit</a>
+                                    <a href="#"  class="btn btn-warning">Edit</a>
                                     <form action="#" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button disabled type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 `;
                             }
@@ -85,11 +84,9 @@ $(document).ready(function() {
             }
         });
     }
-
-    // Call fetch function on document ready to load initial data
+  
     fetchDataAndDisplay();
-
-    // Handle form submission
+  
     $('#addProductForm').on('submit', function(event) {
         event.preventDefault();
 
@@ -108,13 +105,12 @@ $(document).ready(function() {
                                 <form action="#" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button disabled type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
                         </tr>
                     `;
                     $('#products-table').DataTable().row.add($(newRow)).draw(false);
-                  
                     $('#addProductModal').modal('hide');
                     $('#addProductForm')[0].reset();
                 } else {
@@ -128,6 +124,5 @@ $(document).ready(function() {
         });
     });
 });
-
 </script>
 @endsection

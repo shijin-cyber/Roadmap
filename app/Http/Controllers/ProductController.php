@@ -11,12 +11,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            // Validate the request data
+            
             $request->validate([
                 'name' => 'required|string|max:255',
             ]);
 
-            // Create a new product
             $product = Product::create([
                 'name' => $request->name,
             ]);
@@ -35,12 +34,12 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'An error occurred while creating the product.',
-            ], 500); // HTTP status 500: Internal Server Error
+            ], 500);
         }
     }
     public function getProducts()
     {
-        $products = Product::all(); // Fetch all products from the database
+        $products = Product::all(); 
 
         return response()->json(['products' => $products]);
     }
